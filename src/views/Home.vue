@@ -1,7 +1,7 @@
 <template lang="pug">
   .home-container
     h1 Team Name Generator
-    form(@submit.prevent="onSubmit" v-if="readyToEnter")
+    form(@submit.prevent="onSubmit" v-if="enterNames")
       .input-group
         label(for="player-one") Player 1
         input(type="text" id="player-one" v-model="players[0]")
@@ -15,8 +15,16 @@
         label(for="player-four") Player 4
         input(type="text" id="player-four" v-model="players[3]")
       button(type="submit") Generate Team Names
-      p {{ teamOne }}
-      p {{ teamTwo }}
+    .team-container(v-else)
+      .team(v-if="teamOne.length")
+        h2 Team One
+        p {{ teamOne[0] }} & {{ teamOne[1] }}
+      .team(v-if="teamTwo.length")
+        h2 Team Two
+        p {{ teamTwo[0] }} & {{ teamTwo[1] }}
+      .buttons-container
+        button(@click="regenerate") Regenerate Teams
+        button.update-players(@click="toggle") Update Players
 </template>
 
 <script>
@@ -25,7 +33,7 @@ export default {
   data () {
     return {
       players: [],
-      readyToEnter: true,
+      enterNames: true,
       teamOne: '',
       teamTwo: ''
     }
@@ -42,6 +50,15 @@ export default {
       this.shuffle(this.players)
       this.teamOne = this.players.slice(0,2)
       this.teamTwo = this.players.slice(2,4)
+      this.enterNames = false
+      this.players = []
+    },
+    toggle () {
+      this.enterNames === true ? this.enterNames = false : this.enterNames = true
+    },
+    regenerate () {
+      this.players = this.teamOne.concat(this.teamTwo)
+      this.onSubmit()
     }
   }
 }
@@ -55,13 +72,24 @@ export default {
 }
 
 h1 {
-  margin: 5px;
+  margin: 10px 0;
 }
 
 form {
   min-width: 310px;
   max-width: 375px;
   margin: 10px;
+}
+
+.team-container {
+  min-width: 310px;
+  max-width: 375px;
+
+  .team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .input-group {
@@ -93,6 +121,10 @@ button {
 button:hover {
   background-color: #490068;
   border: 1px solid #490068;
+}
+
+.buttons-container {
+  margin-top: 10px;
 }
 </style>
 
