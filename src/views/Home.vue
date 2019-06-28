@@ -1,6 +1,7 @@
 <template lang="pug">
   .home-container
-    h1 Team Name Generator
+    header
+      h1 Foosball Team Generator
     form(@submit.prevent="onSubmit" v-if="enterNames")
       .input-group
         label(for="player-one") Player 1
@@ -69,10 +70,28 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+  min-width: 100vw;
+  color: #222;
 }
 
-h1 {
-  margin: 10px 0;
+header {
+  margin: 0;
+  padding: 20px 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #b200ff20;
+  background: repeating-linear-gradient(
+    45deg,
+    #b200ff30,
+    #b200ff30 5px,
+    #fff 5px,
+    #fff 15px
+  );
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+  }
 }
 
 form {
@@ -84,11 +103,29 @@ form {
 .team-container {
   min-width: 310px;
   max-width: 375px;
+  margin-top: 15px;
 
   .team {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid #b200ff30;
+    border-radius: 5px;
+    margin: 20px 0;
+    padding: 10px;
+    box-shadow: 0px 0px 5px 2px #22222270;
+
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .team:hover {
+    box-shadow: 0px 0px 5px 2px #b200ff;
   }
 }
 
