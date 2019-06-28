@@ -71,7 +71,7 @@ export default {
   align-items: center;
   flex-direction: column;
   min-width: 100vw;
-  color: #222;
+  // color: #222;
 }
 
 header {
