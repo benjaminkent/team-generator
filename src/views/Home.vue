@@ -18,11 +18,19 @@
       button(type="submit") Generate Team Names
     .team-container(v-else)
       .team(v-if="teamOne.players.length")
-        h2 team {{ teamOne.adjective }} {{ teamOne.noun }}
-        p {{ teamOne.players[0] }} & {{ teamOne.players[1] }}
+        h2 team {{ normalizeTeamOneName }}
+        p.players {{ teamOne.players[0] }} & {{ teamOne.players[1] }}
+        .team-setup
+          p.serve(v-if="servesFirst === 0") {{ normalizeTeamOneName }} gets first serve
+          p.serve(v-else) Get ready to defend!
+          p.foosmen Playing the {{ teamOne.foosmen }} foosmen
       .team(v-if="teamTwo.players.length")
         h2 team {{ teamTwo.adjective }} {{ teamTwo.noun }}
-        p {{ teamTwo.players[0] }} & {{ teamTwo.players[1] }}
+        p.players {{ teamTwo.players[0] }} & {{ teamTwo.players[1] }}
+        .team-setup
+          p.serve(v-if="servesFirst === 1") {{ normalizeTeamTwoName }} gets first serve
+          p.serve(v-else) Get ready to defend!
+          p.foosmen Playing the {{ teamTwo.foosmen }} foosmen
       .buttons-container
         button(@click="regenerate") Regenerate Teams
         button.update-players(@click="updatePlayers") Update Players
@@ -41,13 +49,20 @@ export default {
       teamOne: {
         players: [],
         adjective: '',
-        noun: ''
+        noun: '',
+        foosmen: ''
       },
       teamTwo: {
         players: [],
         adjective: '',
-        noun: ''
-      }
+        noun: '',
+        foosmen: ''
+      },
+      foosmen: [
+        'black',
+        'yellow'
+      ],
+      servesFirst: null
     }
   },
   mounted () {
@@ -64,9 +79,12 @@ export default {
     },
     onSubmit () {
       this.shuffle(this.players)
+      this.shuffle(this.foosmen)
       this.setPlayers()
       this.setAdjectives()
       this.setNouns()
+      this.setFoosmen()
+      this.setServesFirst()
       this.enterNames = false
       this.players = []
     },
@@ -82,12 +100,35 @@ export default {
       this.teamOne.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
       this.teamTwo.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
     },
+    setFoosmen () {
+      this.teamOne.foosmen= this.foosmen[0]
+      this.teamTwo.foosmen= this.foosmen[1]
+    },
+    setServesFirst () {
+      this.servesFirst = Math.floor(Math.random() * 2)
+    },
     updatePlayers () {
       this.enterNames === true ? this.enterNames = false : this.enterNames = true
     },
     regenerate () {
       this.players = this.teamOne.players.concat(this.teamTwo.players)
       this.onSubmit()
+    }
+  },
+  computed: {
+    normalizeTeamOneName: function () {
+      let noun = this.teamOne.noun
+      let adj = this.teamOne.adjective
+      let normalNoun = noun.charAt(0).toUpperCase() + noun.slice(1)
+      let normalAdj = adj.charAt(0).toUpperCase() + adj.slice(1)
+      return `${normalNoun} ${normalAdj}`
+    },
+    normalizeTeamTwoName: function () {
+      let noun = this.teamTwo.noun
+      let adj = this.teamTwo.adjective
+      let normalNoun = noun.charAt(0).toUpperCase() + noun.slice(1)
+      let normalAdj = adj.charAt(0).toUpperCase() + adj.slice(1)
+      return `${normalNoun} ${normalAdj}`
     }
   }
 }
@@ -110,15 +151,16 @@ header {
   border-bottom: 1px solid #b200ff20;
   background: repeating-linear-gradient(
     45deg,
-    #b200ff20,
-    #b200ff20 5px,
-    #fff 5px,
-    #fff 15px
+    #333,
+    #333 5px,
+    #222 5px,
+    #222 15px
   );
 
   h1 {
     margin: 0;
     font-size: 24px;
+    color: #f2f2f2;
   }
 }
 
@@ -144,13 +186,33 @@ form {
     box-shadow: 0px 0px 5px 2px #22222270;
 
     h2 {
-      margin: 0 0 10px 0;
+      margin: 0;
       text-transform: capitalize;
       font-size: 18px;
     }
 
     p {
       margin: 0;
+    }
+
+    .players {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+
+    .team-setup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .serve {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .foosmen {
+        font-size: 14px;
+      }
     }
   }
 
