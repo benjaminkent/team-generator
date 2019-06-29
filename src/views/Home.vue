@@ -17,15 +17,15 @@
         input(type="text" id="player-four" v-model="players[3]")
       button(type="submit") Generate Team Names
     .team-container(v-else)
-      .team(v-if="teamOne.length")
-        h2 Team One
-        p {{ teamOne[0] }} & {{ teamOne[1] }}
-      .team(v-if="teamTwo.length")
-        h2 Team Two
-        p {{ teamTwo[0] }} & {{ teamTwo[1] }}
+      .team(v-if="teamOne.players.length")
+        h2 team {{ teamOne.adjective }} {{ teamOne.noun }}
+        p {{ teamOne.players[0] }} & {{ teamOne.players[1] }}
+      .team(v-if="teamTwo.players.length")
+        h2 team {{ teamTwo.adjective }} {{ teamTwo.noun }}
+        p {{ teamTwo.players[0] }} & {{ teamTwo.players[1] }}
       .buttons-container
         button(@click="regenerate") Regenerate Teams
-        button.update-players(@click="toggle") Update Players
+        button.update-players(@click="updatePlayers") Update Players
 </template>
 
 <script>
@@ -38,12 +38,16 @@ export default {
     return {
       players: [],
       enterNames: true,
-      teamOne: '',
-      teamTwo: '',
-      adjectives: [],
-      nouns: [],
-      adjective: '',
-      noun: ''
+      teamOne: {
+        players: [],
+        adjective: '',
+        noun: ''
+      },
+      teamTwo: {
+        players: [],
+        adjective: '',
+        noun: ''
+      }
     }
   },
   mounted () {
@@ -60,18 +64,29 @@ export default {
     },
     onSubmit () {
       this.shuffle(this.players)
-      this.teamOne = this.players.slice(0,2)
-      this.teamTwo = this.players.slice(2,4)
-      this.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
-      this.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
+      this.setPlayers()
+      this.setAdjectives()
+      this.setNouns()
       this.enterNames = false
       this.players = []
     },
-    toggle () {
+    setPlayers () {
+      this.teamOne.players = this.players.slice(0,2)
+      this.teamTwo.players = this.players.slice(2,4)
+    },
+    setAdjectives () {
+      this.teamOne.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
+      this.teamTwo.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
+    },
+    setNouns () {
+      this.teamOne.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
+      this.teamTwo.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
+    },
+    updatePlayers () {
       this.enterNames === true ? this.enterNames = false : this.enterNames = true
     },
     regenerate () {
-      this.players = this.teamOne.concat(this.teamTwo)
+      this.players = this.teamOne.players.concat(this.teamTwo.players)
       this.onSubmit()
     }
   }
@@ -95,8 +110,8 @@ header {
   border-bottom: 1px solid #b200ff20;
   background: repeating-linear-gradient(
     45deg,
-    #b200ff30,
-    #b200ff30 5px,
+    #b200ff20,
+    #b200ff20 5px,
     #fff 5px,
     #fff 15px
   );
@@ -129,7 +144,9 @@ form {
     box-shadow: 0px 0px 5px 2px #22222270;
 
     h2 {
-      margin: 0;
+      margin: 0 0 10px 0;
+      text-transform: capitalize;
+      font-size: 18px;
     }
 
     p {
