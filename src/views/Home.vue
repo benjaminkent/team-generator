@@ -136,6 +136,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
 .home-container {
   display: flex;
   align-items: center;
@@ -146,7 +148,7 @@ export default {
 
 header {
   margin: 0;
-  padding: 20px 0;
+  padding: 15px 0;
   width: 100%;
   text-align: center;
   border-bottom: 1px solid #b200ff20;
@@ -160,8 +162,9 @@ header {
 
   h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 28px;
     color: #f2f2f2;
+    font-family: 'Pacifico', cursive;
   }
 }
 
@@ -174,7 +177,6 @@ form {
 .team-container {
   min-width: 310px;
   max-width: 375px;
-  margin-top: 15px;
 
   .team {
     display: flex;
@@ -183,9 +185,10 @@ form {
     border: 1px solid #b200ff30;
     border-radius: 5px;
     margin: 20px 0;
-    padding: 10px;
+    padding: 30px 10px;
     box-shadow: 0px 0px 4px 2px #22222250;
-    background-color: #fff;
+    background-color: #222;
+    color: #f2f2f2;
 
     h2 {
       margin: 0;
@@ -198,9 +201,10 @@ form {
     }
 
     .players {
-      margin: 20px 0;
-      font-size: 18px;
+      margin: 17px 0;
+      font-size: 22px;
       text-transform: capitalize;
+      font-family: 'Pacifico', cursive;
     }
 
     .team-setup {
@@ -220,7 +224,7 @@ form {
   }
 
   .team:hover {
-    box-shadow: 0px 0px 5px 2px #b200ff70;
+    box-shadow: 0px 0px 5px 2px #2274a5;
   }
 }
 
