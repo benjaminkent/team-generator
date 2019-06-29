@@ -29,6 +29,9 @@
 </template>
 
 <script>
+import { adjectives } from '../data/adjectives.js'
+import { nouns } from '../data/nouns.js'
+
 export default {
   name: 'home',
   data () {
@@ -36,8 +39,16 @@ export default {
       players: [],
       enterNames: true,
       teamOne: '',
-      teamTwo: ''
+      teamTwo: '',
+      adjectives: [],
+      nouns: [],
+      adjective: '',
+      noun: ''
     }
+  },
+  mounted () {
+    this.adjectives = adjectives
+    this.nouns = nouns
   },
   methods: {
     shuffle (array) {
@@ -51,6 +62,8 @@ export default {
       this.shuffle(this.players)
       this.teamOne = this.players.slice(0,2)
       this.teamTwo = this.players.slice(2,4)
+      this.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
+      this.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
       this.enterNames = false
       this.players = []
     },
@@ -71,7 +84,7 @@ export default {
   align-items: center;
   flex-direction: column;
   min-width: 100vw;
-  // color: #222;
+  color: #222;
 }
 
 header {
