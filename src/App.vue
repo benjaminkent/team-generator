@@ -31,6 +31,12 @@ img {
   z-index: -1;
 }
 
+@media(max-width: 505px) {
+  img {
+    height: 300px;
+  }
+}
+
 @media(min-width: 1000px) {
   img {
     height: 800px;
