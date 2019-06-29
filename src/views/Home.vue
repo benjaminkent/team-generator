@@ -121,14 +121,14 @@ export default {
       let adj = this.teamOne.adjective
       let normalNoun = noun.charAt(0).toUpperCase() + noun.slice(1)
       let normalAdj = adj.charAt(0).toUpperCase() + adj.slice(1)
-      return `${normalNoun} ${normalAdj}`
+      return `${normalAdj} ${normalNoun}`
     },
     normalizeTeamTwoName: function () {
       let noun = this.teamTwo.noun
       let adj = this.teamTwo.adjective
       let normalNoun = noun.charAt(0).toUpperCase() + noun.slice(1)
       let normalAdj = adj.charAt(0).toUpperCase() + adj.slice(1)
-      return `${normalNoun} ${normalAdj}`
+      return `${normalAdj} ${normalNoun}`
     }
   }
 }
@@ -183,7 +183,7 @@ form {
     border-radius: 5px;
     margin: 20px 0;
     padding: 10px;
-    box-shadow: 0px 0px 5px 2px #22222270;
+    box-shadow: 0px 0px 4px 2px #22222250;
 
     h2 {
       margin: 0;
@@ -217,7 +217,7 @@ form {
   }
 
   .team:hover {
-    box-shadow: 0px 0px 5px 2px #b200ff;
+    box-shadow: 0px 0px 5px 2px #b200ff70;
   }
 }
 
