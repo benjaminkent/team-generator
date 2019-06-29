@@ -278,6 +278,5 @@ export const nouns = [
   "woman",
   "wing",
   "son",
-  "measure",
   "jewel"
 ]

@@ -78,6 +78,7 @@ export default {
       return array
     },
     onSubmit () {
+      if (this.players.length !== 4) { return }
       this.shuffle(this.players)
       this.shuffle(this.foosmen)
       this.setPlayers()
@@ -184,6 +185,7 @@ form {
     margin: 20px 0;
     padding: 10px;
     box-shadow: 0px 0px 4px 2px #22222250;
+    background-color: #fff;
 
     h2 {
       margin: 0;
@@ -198,6 +200,7 @@ form {
     .players {
       margin: 20px 0;
       font-size: 18px;
+      text-transform: capitalize;
     }
 
     .team-setup {
