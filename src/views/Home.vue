@@ -1,7 +1,7 @@
 <template lang="pug">
   .home-container
     header
-      h1 Foosball Team Generator
+      h1 Grip The Rods
     form(@submit.prevent="onSubmit" v-if="enterNames")
       .input-group
         label(for="player-one") Player 1
@@ -167,7 +167,7 @@ header {
 
   h1 {
     margin: 0 auto;
-    max-width: 370px;
+    max-width: 80%;
     font-size: 28px;
     color: #a1ff91;
     border-radius: 3px;
@@ -282,6 +282,14 @@ button:hover {
 
 .buttons-container {
   margin-top: 10px;
+}
+
+@media(min-width: 700px) {
+  header {
+    h1 {
+      max-width: 310px;
+    }
+  }
 }
 </style>
 
