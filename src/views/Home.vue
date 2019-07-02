@@ -19,14 +19,18 @@
     .team-container(v-else)
       .team(v-if="teamOne.players.length")
         h2 team {{ normalizeTeamOneName }}
+        .top-line
         p.players {{ teamOne.players[0] }} & {{ teamOne.players[1] }}
+        .bottom-line
         .team-setup
           p.serve(v-if="servesFirst === 0") {{ normalizeTeamOneName }} gets first serve
           p.serve(v-else) Get ready to defend!
           p.foosmen Playing the {{ teamOne.foosmen }} foosmen
       .team(v-if="teamTwo.players.length")
         h2 team {{ teamTwo.adjective }} {{ teamTwo.noun }}
+        .top-line
         p.players {{ teamTwo.players[0] }} & {{ teamTwo.players[1] }}
+        .bottom-line
         .team-setup
           p.serve(v-if="servesFirst === 1") {{ normalizeTeamTwoName }} gets first serve
           p.serve(v-else) Get ready to defend!
@@ -136,7 +140,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Righteous|Rock+Salt&display=swap');
 
 .home-container {
   display: flex;
@@ -151,20 +155,25 @@ header {
   padding: 15px 0;
   width: 100%;
   text-align: center;
-  border-bottom: 1px solid #b200ff20;
+  border-bottom: 1px solid #222;
+  box-shadow: 0 0 2px 3px #555;
   background: repeating-linear-gradient(
     45deg,
-    #333,
-    #333 5px,
-    #222 5px,
-    #222 15px
+    #fff,
+    #fff 15px,
+    #222 15px,
+    #222 30px
   );
 
   h1 {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 370px;
     font-size: 28px;
-    color: #f2f2f2;
-    font-family: 'Pacifico', cursive;
+    color: #a1ff91;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    font-family: 'Righteous', cursive;
+    background-color: #222;
   }
 }
 
@@ -185,15 +194,27 @@ form {
     border: 1px solid #b200ff30;
     border-radius: 5px;
     margin: 20px 0;
-    padding: 30px 10px;
+    padding: 20px 10px;
     box-shadow: 0px 0px 4px 2px #22222250;
     background-color: #222;
     color: #f2f2f2;
 
+    .top-line {
+      border: 1px solid #a1ff9190;
+      width: 70px;
+      margin: 10px 0 5px 0;
+    }
+
+    .bottom-line {
+      border: 1px solid #a1ff9190;
+      width: 70px;
+      margin: 10px 0;
+    }
+
     h2 {
       margin: 0;
       text-transform: capitalize;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     p {
@@ -201,10 +222,10 @@ form {
     }
 
     .players {
-      margin: 17px 0;
-      font-size: 22px;
+      margin: 0;
+      font-size: 16px;
       text-transform: capitalize;
-      font-family: 'Pacifico', cursive;
+      font-family: 'Rock Salt', cursive;
     }
 
     .team-setup {
@@ -224,7 +245,7 @@ form {
   }
 
   .team:hover {
-    box-shadow: 0px 0px 5px 2px #2274a5;
+    box-shadow: 0px 0px 5px 2px #a1ff91;
   }
 }
 
