@@ -174,7 +174,6 @@ header {
     border-radius: 3px;
     letter-spacing: 1px;
     font-family: 'Righteous', cursive;
-    background-color: #222;
   }
 }
 
