@@ -107,8 +107,8 @@ export default {
       this.teamTwo.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
     },
     setFoosmen () {
-      this.teamOne.foosmen= this.foosmen[0]
-      this.teamTwo.foosmen= this.foosmen[1]
+      this.teamOne.foosmen = this.foosmen[0]
+      this.teamTwo.foosmen = this.foosmen[1]
     },
     setServesFirst () {
       this.servesFirst = Math.floor(Math.random() * 2)
