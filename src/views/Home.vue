@@ -159,10 +159,10 @@ header {
   box-shadow: 0 0 2px 3px #555;
   background: repeating-linear-gradient(
     45deg,
-    #fff,
-    #fff 15px,
-    #222 15px,
-    #222 30px
+    #333,
+    #333 5px,
+    #222 5px,
+    #222 15px
   );
 
   h1 {
