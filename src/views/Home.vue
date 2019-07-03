@@ -91,7 +91,6 @@ export default {
       this.setFoosmen()
       this.setServesFirst()
       this.enterNames = false
-      this.players = []
     },
     setPlayers () {
       this.teamOne.players = this.players.slice(0,2)
