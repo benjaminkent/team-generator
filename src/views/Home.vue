@@ -49,6 +49,8 @@ export default {
   data () {
     return {
       players: [],
+      adjectives: [],
+      nouns: [],
       enterNames: true,
       teamOne: {
         players: [],
