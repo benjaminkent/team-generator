@@ -158,7 +158,7 @@ header {
   width: 100%;
   text-align: center;
   border-bottom: 1px solid #222;
-  box-shadow: 0 0 2px 3px #555;
+  box-shadow: 0 0 4px 2px #555;
   background: repeating-linear-gradient(
     45deg,
     #333,
