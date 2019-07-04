@@ -1,21 +1,21 @@
 <template lang="pug">
   .home-container
     header
-      img.logo(src="../assets/gtr-logo.png")
+      img.logo(src="../assets/gtr-logo.png" alt="GTR")
       h1 Grip The Rods
     form(@submit.prevent="onSubmit" v-if="enterNames")
       .input-group
         label(for="player-one") Player 1
-        input(type="text" id="player-one" v-model="players[0]")
+        input(type="text" id="player-one" v-model="enteredPlayers[0]")
       .input-group
         label(for="player-two") Player 2
-        input(type="text" id="player-two" v-model="players[1]")
+        input(type="text" id="player-two" v-model="enteredPlayers[1]")
       .input-group
         label(for="player-three") Player 3
-        input(type="text" id="player-three" v-model="players[2]")
+        input(type="text" id="player-three" v-model="enteredPlayers[2]")
       .input-group
         label(for="player-four") Player 4
-        input(type="text" id="player-four" v-model="players[3]")
+        input(type="text" id="player-four" v-model="enteredPlayers[3]")
       button(type="submit") Generate Team Names
     .team-container(v-else)
       .team(v-if="teamOne.players.length")
@@ -49,7 +49,7 @@ export default {
   name: 'home',
   data () {
     return {
-      players: [],
+      enteredPlayers: [],
       adjectives: [],
       nouns: [],
       enterNames: true,
@@ -85,8 +85,8 @@ export default {
       return array
     },
     onSubmit () {
-      if (this.players.length !== 4) { return }
-      this.shuffle(this.players)
+      if (this.enteredPlayers.length !== 4) { return }
+      this.shuffle(this.enteredPlayers)
       this.shuffle(this.foosmen)
       this.setPlayers()
       this.setAdjectives()
@@ -96,8 +96,8 @@ export default {
       this.enterNames = false
     },
     setPlayers () {
-      this.teamOne.players = this.players.slice(0,2)
-      this.teamTwo.players = this.players.slice(2,4)
+      this.teamOne.players = this.enteredPlayers.slice(0,2)
+      this.teamTwo.players = this.enteredPlayers.slice(2,4)
     },
     setAdjectives () {
       this.teamOne.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
@@ -118,7 +118,7 @@ export default {
       this.enterNames === true ? this.enterNames = false : this.enterNames = true
     },
     regenerate () {
-      this.players = this.teamOne.players.concat(this.teamTwo.players)
+      this.enteredPlayers = this.teamOne.players.concat(this.teamTwo.players)
       this.onSubmit()
     }
   },
