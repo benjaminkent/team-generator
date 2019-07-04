@@ -269,8 +269,8 @@ input {
 button {
   margin-top: 10px;
   width: 100%;
-  font-size: 14px;
-  padding: 12px;
+  font-size: 16px;
+  padding: 8px;
   border: 1px solid #b200ff;
   background-color: #b200ff;
   color: #fff;
