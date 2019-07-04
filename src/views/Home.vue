@@ -250,10 +250,6 @@ form {
       }
     }
   }
-
-  .team:hover {
-    box-shadow: 0px 0px 5px 2px #a1ff91;
-  }
 }
 
 .input-group {
