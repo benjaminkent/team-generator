@@ -2,7 +2,7 @@
   .app-container
     .image-container
       .background-image
-        img(src="./assets/foos.png" alt="foosball table")
+        img.background(src="./assets/foos.png" alt="foosball table")
     router-view
 </template>
 
@@ -23,7 +23,7 @@ body {
   justify-content: center;
 }
 
-img {
+.background {
   position: absolute;
   top: 100px;
   opacity: 0.05;
@@ -32,13 +32,13 @@ img {
 }
 
 @media(max-width: 505px) {
-  img {
+  .background {
     height: 300px;
   }
 }
 
 @media(min-width: 1000px) {
-  img {
+  .background {
     height: 800px;
   }
 }

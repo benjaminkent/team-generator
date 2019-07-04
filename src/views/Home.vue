@@ -1,6 +1,7 @@
 <template lang="pug">
   .home-container
     header
+      img.logo(src="../assets/gtr-logo.png")
       h1 Grip The Rods
     form(@submit.prevent="onSubmit" v-if="enterNames")
       .input-group
@@ -153,7 +154,7 @@ export default {
 
 header {
   margin: 0;
-  padding: 15px 0;
+  padding: 5px 0;
   width: 100%;
   text-align: center;
   border-bottom: 1px solid #222;
@@ -165,9 +166,15 @@ header {
     #222 5px,
     #222 15px
   );
+  display: flex;
+  justify-content: center;
+
+  .logo {
+    height: 60px;
+  }
 
   h1 {
-    margin: 0 auto;
+    margin: 10px 0 0 10px;
     max-width: 80%;
     font-size: 28px;
     color: #a1ff91;
