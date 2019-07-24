@@ -256,11 +256,11 @@ form {
 
       .serve {
         font-size: 14px;
-        margin-bottom: 5px;
       }
 
       .foosmen {
         font-size: 14px;
+        margin: 3px 0;
       }
 
       .offordef {
