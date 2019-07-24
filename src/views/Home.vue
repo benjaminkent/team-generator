@@ -27,6 +27,7 @@
           p.serve(v-if="servesFirst === 0") {{ normalizeTeamOneName }} gets first serve
           p.serve(v-else) Get ready to defend!
           p.foosmen Playing the {{ teamOne.foosmen }} foosmen
+          p.offordef {{ capitalizePlayerName(teamOne.players[0]) }} on Offense, {{ capitalizePlayerName(teamOne.players[1]) }} on Defense
       .team(v-if="teamTwo.players.length")
         h2 team {{ teamTwo.adjective }} {{ teamTwo.noun }}
         .top-line
@@ -36,6 +37,7 @@
           p.serve(v-if="servesFirst === 1") {{ normalizeTeamTwoName }} gets first serve
           p.serve(v-else) Get ready to defend!
           p.foosmen Playing the {{ teamTwo.foosmen }} foosmen
+          p.offordef {{ capitalizePlayerName(teamTwo.players[0]) }} on Offense, {{ capitalizePlayerName(teamTwo.players[1]) }} on Defense
       .buttons-container
         button(@click="regenerate") Regenerate Teams
         button.update-players(@click="updatePlayers") Update Players
@@ -47,7 +49,7 @@ import { nouns } from '../data/nouns.js'
 
 export default {
   name: 'home',
-  data () {
+  data() {
     return {
       enteredPlayers: [],
       adjectives: [],
@@ -65,27 +67,26 @@ export default {
         noun: '',
         foosmen: ''
       },
-      foosmen: [
-        'black',
-        'yellow'
-      ],
+      foosmen: ['black', 'yellow'],
       servesFirst: null
     }
   },
-  mounted () {
+  mounted() {
     this.adjectives = adjectives
     this.nouns = nouns
   },
   methods: {
-    shuffle (array) {
+    shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        let j = Math.floor(Math.random() * (i + 1))
+        ;[array[i], array[j]] = [array[j], array[i]]
       }
       return array
     },
-    onSubmit () {
-      if (this.enteredPlayers.length !== 4) { return }
+    onSubmit() {
+      if (this.enteredPlayers.length !== 4) {
+        return
+      }
       this.shuffle(this.enteredPlayers)
       this.shuffle(this.foosmen)
       this.setPlayers()
@@ -95,42 +96,55 @@ export default {
       this.setServesFirst()
       this.enterNames = false
     },
-    setPlayers () {
-      this.teamOne.players = this.enteredPlayers.slice(0,2)
-      this.teamTwo.players = this.enteredPlayers.slice(2,4)
+    setPlayers() {
+      this.teamOne.players = this.enteredPlayers.slice(0, 2)
+      this.teamTwo.players = this.enteredPlayers.slice(2, 4)
     },
-    setAdjectives () {
-      this.teamOne.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
-      this.teamTwo.adjective = this.adjectives[Math.floor(Math.random() * this.adjectives.length)]
+    setAdjectives() {
+      this.teamOne.adjective = this.adjectives[
+        Math.floor(Math.random() * this.adjectives.length)
+      ]
+      this.teamTwo.adjective = this.adjectives[
+        Math.floor(Math.random() * this.adjectives.length)
+      ]
     },
-    setNouns () {
-      this.teamOne.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
-      this.teamTwo.noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
+    setNouns() {
+      this.teamOne.noun = this.nouns[
+        Math.floor(Math.random() * this.nouns.length)
+      ]
+      this.teamTwo.noun = this.nouns[
+        Math.floor(Math.random() * this.nouns.length)
+      ]
     },
-    setFoosmen () {
+    setFoosmen() {
       this.teamOne.foosmen = this.foosmen[0]
       this.teamTwo.foosmen = this.foosmen[1]
     },
-    setServesFirst () {
+    setServesFirst() {
       this.servesFirst = Math.floor(Math.random() * 2)
     },
-    updatePlayers () {
-      this.enterNames === true ? this.enterNames = false : this.enterNames = true
+    updatePlayers() {
+      this.enterNames === true
+        ? (this.enterNames = false)
+        : (this.enterNames = true)
     },
-    regenerate () {
+    regenerate() {
       this.enteredPlayers = this.teamOne.players.concat(this.teamTwo.players)
       this.onSubmit()
+    },
+    capitalizePlayerName(player) {
+      return player.split('')[0].toUpperCase() + player.slice(1)
     }
   },
   computed: {
-    normalizeTeamOneName: function () {
+    normalizeTeamOneName: function() {
       let noun = this.teamOne.noun
       let adj = this.teamOne.adjective
       let normalNoun = noun.charAt(0).toUpperCase() + noun.slice(1)
       let normalAdj = adj.charAt(0).toUpperCase() + adj.slice(1)
       return `${normalAdj} ${normalNoun}`
     },
-    normalizeTeamTwoName: function () {
+    normalizeTeamTwoName: function() {
       let noun = this.teamTwo.noun
       let adj = this.teamTwo.adjective
       let normalNoun = noun.charAt(0).toUpperCase() + noun.slice(1)
@@ -248,6 +262,10 @@ form {
       .foosmen {
         font-size: 14px;
       }
+
+      .offordef {
+        font-size: 14px;
+      }
     }
   }
 }
@@ -287,7 +305,7 @@ button:hover {
   margin-top: 10px;
 }
 
-@media(min-width: 700px) {
+@media (min-width: 700px) {
   header {
     h1 {
       max-width: 310px;
