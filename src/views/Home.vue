@@ -1,7 +1,10 @@
 <template lang="pug">
   .home-container
     header
-      img.logo(src="../assets/gtr-logo.png" alt="GTR")
+      img.logo(
+        src="../assets/gtr-logo.png"
+        alt="GTR"
+      )
       h1 Grip The Rods
     form(@submit.prevent="onSubmit" v-if="enterNames")
       .input-group
@@ -17,7 +20,7 @@
         label(for="player-four") Player 4
         input(type="text" id="player-four" v-model="enteredPlayers[3]")
       button(type="submit") Generate Team Names
-    .team-container(v-else)
+    .team-container(v-if="showCards")
       .team(v-if="teamOne.players.length")
         h2 team {{ normalizeTeamOneName }}
         .top-line
@@ -41,6 +44,8 @@
       .buttons-container
         button(@click="regenerate") Regenerate Teams
         button.update-players(@click="updatePlayers") Update Players
+    .cat-surprise(v-if="showCat")
+      img(src="https://media.giphy.com/media/3oEduQAsYcJKQH2XsI/giphy.gif" alt="cat shooting cucumbers")
 </template>
 
 <script>
@@ -55,6 +60,8 @@ export default {
       adjectives: [],
       nouns: [],
       enterNames: true,
+      showCards: false,
+      showCat: false,
       teamOne: {
         players: [],
         adjective: '',
@@ -95,6 +102,7 @@ export default {
       this.setFoosmen()
       this.setServesFirst()
       this.enterNames = false
+      this.showCards = true
     },
     setPlayers() {
       this.teamOne.players = this.enteredPlayers.slice(0, 2)
@@ -125,6 +133,7 @@ export default {
     },
     updatePlayers() {
       this.enterNames === true ? (this.enterNames = false) : (this.enterNames = true)
+      this.showCards === true ? (this.showCards = false) : (this.showCards = true)
     },
     regenerate() {
       this.enteredPlayers = this.teamOne.players.concat(this.teamTwo.players)
