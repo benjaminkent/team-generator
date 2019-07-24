@@ -124,9 +124,7 @@ export default {
       this.servesFirst = Math.floor(Math.random() * 2)
     },
     updatePlayers() {
-      this.enterNames === true
-        ? (this.enterNames = false)
-        : (this.enterNames = true)
+      this.enterNames === true ? (this.enterNames = false) : (this.enterNames = true)
     },
     regenerate() {
       this.enteredPlayers = this.teamOne.players.concat(this.teamTwo.players)
